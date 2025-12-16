@@ -3,9 +3,13 @@ This is a full-stack project for theses assigment management for students and pr
 
 # Tech Stack #
 Backend : Java, Spring Boot
+
 Frontend : Javascript, Thymeleaf
+
 Database : MySQL
+
 Database Managment: phpMyAdmin
+
 Testing : Mockito
 
 # HOW TO RUN #
