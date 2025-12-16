@@ -1,2 +1,0 @@
-# diplomaApp
-Theses Managment App
