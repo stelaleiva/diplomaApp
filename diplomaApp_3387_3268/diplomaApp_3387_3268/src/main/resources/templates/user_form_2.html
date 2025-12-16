@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Επεξεργασία Προφίλ</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" th:href="@{/css/styleUserForm_2.css}" />
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Διαχείριση Διπλωματικών</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/myprofile">Προφίλ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/diploma">Διπλωματικές Εργασίες</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/applications">Αιτήσεις</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/supervised">Ενεργή Διπλωματική Εργασία</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Αποσύνδεση</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+  <div class="container-fluid">
+    <div class="text-center"><h2>[[${pageTitle}]]</h2></div>
+
+    <form th:action="@{/users/save}" method="post" th:object="${user}"
+          style="max-width: 500px; margin: 0 auto;">
+      <input type="hidden" th:field="*{id}">
+      <div class="border border-secondary rounded p-3">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Username:</label>
+          <div class="col-sm-8">
+            <input type="text"  id="userName" th:field="*{userName}" class="form-control" maxlength="45" onkeyup="validateUsername()" required/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Password:</label>
+          <div class="col-sm-8">
+            <input type="text" id="pass" th:field="*{password}" class="form-control" minlength="5" maxlength="45" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Full Name:</label>
+          <div class="col-sm-8">
+            <input type="text" id="fullname" th:field="*{full_name}" class="form-control" maxlength="45" onkeyup="validateFullname()" required/>
+          </div>
+        </div>
+        <div th:if="${user.role} == 'STUD'">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Average Grade:</label>
+            <div class="col-sm-8">
+              <input id="avg_grade" type="text" th:field="*{avg_grade}" class="form-control" maxlength="15" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Remain Courses:</label>
+            <div class="col-sm-8">
+              <input id="remain_courses" type="text" th:field="*{remain_courses}" class="form-control" maxlength="45" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Years Left:</label>
+            <div class="col-sm-8">
+              <input id="years" type="text" th:field="*{years}" class="form-control" maxlength="15" />
+            </div>
+          </div>
+        </div>
+        <div th:if="${user.role} == 'PROF'" >
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Speciality:</label>
+            <div class="col-sm-8">
+              <input id="speciality" type="text" th:field="*{speciality}" class="form-control" maxlength="15" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <input type="hidden" th:field="*{role}" th:value="${user.role}">
+          <input type="hidden" th:field="*{enabled}">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary m-2">Αποθήκευση</button>
+          <button type="button" class="btn btn-secondary m-2" onclick="window.location.href='/myprofile'">Ακύρωση</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+<script>
+  $("#avg_grade").keyup(function () {
+    var grade = this.value;
+
+    if (grade > 10) {
+      alert("Ο μέγιστος βαθμός είναι 10")
+      $('#avg_grade').val(0);
+    }
+  });
+  $(document).ready(function() {
+    $("#pass").val("");
+  });
+
+  function validateUsername() {
+    setTimeout(() => {
+      var uname = $('#userName').val();
+      if(uname=="anonymousUser"){
+        alert("Αυτό το username απαγορεύεται!")
+        $('#userName').val("");
+      }else{
+        $.ajax({
+          type: "POST",
+          url: "/users/exist/"+uname,
+          success: function(msg){
+            console.log(msg);
+            if(msg=="Ναι"){
+
+              alert("Το username υπάρχει ήδη!")
+              $('#userName').val("");
+            }
+          }
+        });
+      }
+
+    }, 2000);
+  };
+
+  function validateFullname() {
+    setTimeout(() => {
+      var fname = $('#fullname').val();
+      if(fname=="anonymousUser"){
+        alert("Αυτό το ονοματεπώνυμο απαγορεύεται!")
+        $('#fullname').val("");
+      }else {
+        $.ajax({
+          type: "POST",
+          url: "/users/existFullname/" + fname,
+          success: function (msg) {
+            console.log(msg);
+            if (msg == "Ναι") {
+
+              alert("Το ονοματεπώνυμο υπάρχει ήδη!")
+              $('#fullname').val("");
+            }
+          }
+        });
+      }
+    }, 2000);
+  };
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Αιτήσεις Διπλωματικών</title>
+  <link rel="stylesheet" th:href="@{/css/styleApplication.css}" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Διαχείριση Διπλωματικών</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/myprofile">Προφίλ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diploma">Διπλωματικές Εργασίες</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/applications">Αιτήσεις</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/supervised">Ενεργή Διπλωματική Εργασία</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Αποσύνδεση</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid text-center">
+  <div><h2>Αιτήσεις Διπλωματικών</h2></div><br>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Τίτλος</th>
+        <th>Κατάσταση</th>
+      </tr>
+      </thead>
+      <tbody>
+          <th:block th:each="applications : ${listApplications}">
+            <tr>
+             <td>[[${applications.app_id}]]</td>
+
+               <td>
+                 <a th:href="@{'/diploma/info/' + ${applications.diploma_id}}">[[${applications.diploma}]]</a>
+               </td>
+               <td th:if="${role == 'PROF'} ">
+                  <a th:href="@{'/applications/info/' + ${applications.diploma_id}}">Λεπτομέρειες</a>
+               </td>
+               <td th:if="${role== 'STUD'} ">[[${applications.selected}]]</td>
+             </tr>
+          </th:block>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

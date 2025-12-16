@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Αναθετημένες Διπλωματικές Εργασίες</title>
+  <link rel="stylesheet" th:href="@{/css/styleSupervised.css}" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Διαχείριση Διπλωματικών</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/myprofile">Προφίλ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diploma">Διπλωματικές Εργασίες</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/applications">Αιτήσεις</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/supervised">Ενεργή Διπλωματική Εργασία</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Αποσύνδεση</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid text-center">
+  <div><h2>Αναθετημένες Διπλωματικές Εργασίες</h2></div><br>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>Τίτλος</th>
+        <th th:if="${role == 'PROF'} ">Ονοματεπώνυμο Μαθητή</th>
+        <th>Implement Grade</th>
+        <th>Report Grade</th>
+        <th>Present Grade</th>
+        <th>Overall Grade</th>
+        <th th:if="${role == 'PROF'} " >Βαθμολόγηση</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="supervised : ${listSupervised}">
+        <tr>
+          <td>[[${supervised.diploma}]]</td>
+          <td th:if="${role == 'PROF'} ">[[${supervised.student}]]</td>
+          <td>[[${supervised.implem_grade}]]</td>
+          <td>[[${supervised.report_grade}]]</td>
+          <td>[[${supervised.present_grade}]]</td>
+          <td>[[${supervised.overall_grade}]]</td>
+          <td th:if="${role == 'PROF'} ">
+            <a th:href="@{'/supervised/edit/' + ${supervised.super_id}}">Επεξεργασία</a>
+          </td>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

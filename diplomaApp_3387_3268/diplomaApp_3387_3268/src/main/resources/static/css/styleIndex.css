@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg,#7e9a9a, #f6d8ac);
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+  background: url("book.jpg")no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+
+
+h1 {
+    font-size: 30px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+.h3 {
+  font-size: 25px;
+  width: 100%;
+  height: 50px;
+  border: dashed;
+  border-radius: 10px;
+  color: #e9f4fb;
+  padding: 4px 4px 4px 4px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+
+.h3:hover{
+  border-color: #000000;
+  transition: .5s;
+}
+
+.container-fluid{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 235px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
+  border-radius: 10px;
+  border: dashed;
+  text-align: center;
+}
+.container-fluid h1{
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}

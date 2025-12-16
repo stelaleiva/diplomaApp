@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg,#7e9a9a, #f6d8ac);
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+  background: url("book.jpg")no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+h2{
+  font-size: 30px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding:5px;
+}
+
+.container-fluid{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 480px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur( 50px );
+  -webkit-backdrop-filter: blur( 80px );
+  border-radius: 10px;
+  border: dashed;
+  text-align: center;
+  font-size: 25px;
+}
+
+.form-group label{
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  font-size: 20px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.form-control {
+  text-align: center;
+  padding: 2px 0;
+  border-bottom: 2px solid silver;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+button{
+  text-align: center;
+  padding: 5px ;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 10px;
+}
+
+button:hover{
+  border-color: #000000;
+  transition: .5s;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Διπλωματικές Εργασίες</title>
+  <link rel="stylesheet" th:href="@{/css/styleDiploma.css}" />
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Διαχείριση Διπλωματικών</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/myprofile">Προφίλ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diploma">Διπλωματικές Εργασίες</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/applications">Αιτήσεις</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/supervised">Ενεργή Διπλωματική Εργασία</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Αποσύνδεση</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid text-center">
+    <div><h2>Διπλωματικές Εργασίες</h2></div><br>
+    <div class="m-2">
+      <a class="h3" th:if="${role} == 'PROF'" th:href="@{/add-diploma}">Καταχώρηση Νέας Διπλωματικής</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+      [[${message}]]
+    </div>
+    <td>
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Τίτλος</th>
+          <th>Αντικείμενο</th>
+          <th th:if="${role} == 'STUD'">Καθηγητής</th>
+          <th>Διαθεσιμότητα</th>
+          <th ></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="diploma : ${listDiplomas}">
+          <tr>
+            <td>[[${diploma.diploma_id}]]</td>
+            <td>[[${diploma.title}]]</td>
+            <td>[[${diploma.objectives}]]</td>
+            <td th:if="${role} == 'STUD'">[[${diploma.user}]]</td>
+            <td th:if="${role == 'PROF'} ">
+              <div th:if="${role == 'PROF' && diploma.available == 'Ναι'} ">
+                <a class="h4 mr-3"  th:href="@{'/diploma/edit/' + ${diploma.diploma_id}}">Επεξεργασία</a>
+                <a class="h4" th:href="@{'/diploma/delete/' + ${diploma.diploma_id}}">Διαγραφή</a>
+              </div>
+              <div th:unless="${role == 'PROF' && diploma.available == 'Ναι'}">
+                Έχει ανατεθεί σε μαθητή
+              </div>
+            </td>
+            <td th:if="${role == 'STUD'} ">
+                <div th:if="${flag=='yes'}">
+                  <div th:if="${role == 'STUD' && diploma.available == 'Ναι'} ">
+                    <a class="h4 mr-3"  th:href="@{'/diploma/info/' + ${diploma.diploma_id}}">Λεπτομέρειες</a>
+                    <a class="h4 mr-3"  th:href="@{'/applications/apply/' + ${diploma.diploma_id}}">Apply</a>
+                  </div>
+                  <div th:unless="${role == 'STUD' && diploma.available == 'Ναι'}">
+                    Μη διαθέσιμη. Ανατέθηκε σε άλλο μαθητή
+                  </div>
+                </div>
+                <div th:unless="${flag=='yes'}">
+                  Δεν μπορεί να σας ανατεθεί επιπλέον Διπλωματική
+                </div>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Το Προφίλ μου</title>
+  <link rel="stylesheet" th:href="@{/css/styleMyProfile.css}" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Διαχείριση Διπλωματικών</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/myprofile">Προφίλ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diploma">Διπλωματικές Εργασίες</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/applications">Αιτήσεις</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/supervised">Ενεργή Διπλωματική Εργασία</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Αποσύνδεση</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid text-center">
+    <div><h2>Το Προφίλ μου</h2></div>
+    <div th:if="${message}" class="alert alert-success text-center">
+      [[${message}]]
+    </div>
+    <div>
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user : ${listUsers}">
+          <tr>
+            <td><a th:href="@{'/users/edit/' + ${user.id}}">[[${user.userName}]] </a></td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

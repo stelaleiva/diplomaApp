@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg,#7e9a9a, #f6d8ac);
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+  background: url("book.jpg")no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  
+  backdrop-filter: blur( 5px );
+  -webkit-backdrop-filter: blur( 0px );
+  border-radius: 10px;
+  border: dashed;
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+  float: left;
+  font-size: 20px;
+  border-radius: 10px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: white;
+  border-radius: 30px;
+  color: #000000;
+  font:bold;
+}
+
+a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+h2 {
+    font-size: 30px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
+
+.container-fluid{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur(20px );
+  border-radius: 10px;
+  border: dashed;
+  text-align: center;
+  font-size: 25px;
+}
+
+.container-fluid h2{
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}
+
+.thead-dark th{
+  position: center;
+  text-align: center;
+  font-size: 25px;
+  border-bottom: 1px solid silver;
+}
+.table{
+  width: 1200px;
+}
+
+
+
